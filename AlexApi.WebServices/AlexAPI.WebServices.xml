@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AlexAPI.WebServices</name>
+    </assembly>
+    <members>
+        <member name="M:AlexApi.WebServices.Controllers.LoginController.Authenticate(AlexAPI.WebServices.Models.UserViewModel)">
+             <summary>
+             Login user.
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 POST /Login/Authenticate
+                 {
+                    "UserName": "Test",
+                    "Password": "121212"
+                 }
+            
+             </remarks>
+             <response code="200">Returns the token</response>
+             <response code="400">Bad Request</response> 
+             <response code="401">Unauthorized</response> 
+        </member>
+        <member name="M:AlexApi.WebServices.Controllers.LoginController.Authorize">
+            <summary>
+            Authorize user.
+            </summary>
+            <response code="200">Returns the user</response>
+            <response code="401">Unauthorized</response>
+        </member>
+        <member name="M:AlexAPI.WebServices.Controllers.RegisterController.Register(AlexAPI.WebServices.Models.UserViewModel)">
+             <summary>
+             Register user.
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 POST /Register
+                 {
+                    "UserName": "Test",
+                    "Password": "121212"
+                 }
+            
+             </remarks>
+             <response code="200">Returns the success message</response>
+             <response code="400">Bad Request</response> 
+        </member>
+    </members>
+</doc>

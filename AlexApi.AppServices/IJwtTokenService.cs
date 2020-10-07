@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlexApi.AppServices.Abstract
+namespace AlexApi.AppServices
 {
     public interface IJwtTokenService
     {

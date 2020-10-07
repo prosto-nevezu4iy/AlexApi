@@ -1,0 +1,26 @@
+2020-10-06 17:23:46.435 +03:00 [INF] User profile is available. Using 'C:\Users\alrotaru\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2020-10-06 17:23:46.755 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-10-06 17:23:46.756 +03:00 [INF] Hosting environment: Development
+2020-10-06 17:23:46.756 +03:00 [INF] Content root path: C:\Projects\AlexApi\AlexApi.WebServices
+2020-10-06 17:23:46.792 +03:00 [INF] Request starting HTTP/2.0 GET https://localhost:44388/index.html  
+2020-10-06 17:23:46.927 +03:00 [INF] Request finished in 139.305ms 200 text/html;charset=utf-8
+2020-10-06 17:23:47.406 +03:00 [INF] Request starting HTTP/2.0 GET https://localhost:44388/swagger/v1/swagger.json  
+2020-10-06 17:23:47.426 +03:00 [INF] Request starting HTTP/2.0 GET https://localhost:44388/favicon-32x32.png  
+2020-10-06 17:23:47.450 +03:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2020-10-06 17:23:47.450 +03:00 [INF] Request finished in 23.5955ms 200 image/png
+2020-10-06 17:23:47.698 +03:00 [INF] Request finished in 293.2793ms 200 application/json;charset=utf-8
+2020-10-06 17:23:58.773 +03:00 [INF] Request starting HTTP/2.0 POST https://localhost:44388/Register application/json 70
+2020-10-06 17:23:58.861 +03:00 [INF] Executing endpoint 'AlexAPI.WebServices.Controllers.RegisterController.Register (AlexAPI.WebServices)'
+2020-10-06 17:23:58.899 +03:00 [INF] Route matched with {action = "Register", controller = "Register"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Register(AlexAPI.WebServices.Models.UserViewModel) on controller AlexAPI.WebServices.Controllers.RegisterController (AlexAPI.WebServices).
+2020-10-06 17:23:59.529 +03:00 [INF] Executing HttpStatusCodeResult, setting HTTP status code 200
+2020-10-06 17:23:59.544 +03:00 [INF] Executed action AlexAPI.WebServices.Controllers.RegisterController.Register (AlexAPI.WebServices) in 631.4758ms
+2020-10-06 17:23:59.545 +03:00 [INF] Executed endpoint 'AlexAPI.WebServices.Controllers.RegisterController.Register (AlexAPI.WebServices)'
+2020-10-06 17:23:59.546 +03:00 [INF] Request finished in 773.3455ms 200 
+2020-10-06 17:24:11.414 +03:00 [INF] Request starting HTTP/2.0 POST https://localhost:44388/Login/Authenticate application/json 70
+2020-10-06 17:24:11.417 +03:00 [INF] Executing endpoint 'AlexApi.WebServices.Controllers.LoginController.Authenticate (AlexAPI.WebServices)'
+2020-10-06 17:24:11.425 +03:00 [INF] Route matched with {action = "Authenticate", controller = "Login"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Authenticate(AlexAPI.WebServices.Models.UserViewModel) on controller AlexApi.WebServices.Controllers.LoginController (AlexAPI.WebServices).
+2020-10-06 17:24:11.466 +03:00 [INF] Test log
+2020-10-06 17:24:11.652 +03:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2020-10-06 17:24:11.656 +03:00 [INF] Executed action AlexApi.WebServices.Controllers.LoginController.Authenticate (AlexAPI.WebServices) in 231.426ms
+2020-10-06 17:24:11.657 +03:00 [INF] Executed endpoint 'AlexApi.WebServices.Controllers.LoginController.Authenticate (AlexAPI.WebServices)'
+2020-10-06 17:24:11.657 +03:00 [INF] Request finished in 243.4724ms 200 application/json; charset=utf-8

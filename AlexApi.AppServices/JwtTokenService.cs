@@ -1,5 +1,4 @@
-﻿using AlexApi.AppServices.Abstract;
-using AlexApi.Domain.Models;
+﻿using AlexApi.Domain.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -8,7 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace AlexApi.AppServices.Services
+namespace AlexApi.AppServices
 {
     public class JwtTokenService : IJwtTokenService
     {

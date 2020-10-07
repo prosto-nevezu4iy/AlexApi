@@ -1,12 +1,16 @@
-﻿using AlexApi.AppServices.Abstract;
-using AlexApi.AppServices.Services;
+﻿using AlexApi.AppServices;
+using AlexApi.Domain.Models;
 using AlexApi.Infrasctucture.Extensions;
+using AlexApi.Repositories.Interfaces;
 using AlexApi.Repositories.Repositories;
 using AlexAPI.WebServices.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Serilog;
+using System;
+using System.Diagnostics;
 
 namespace AlexApi.WebServices.Controllers
 {
@@ -16,11 +20,13 @@ namespace AlexApi.WebServices.Controllers
     {
         private readonly IUserRepository _repository;
         private readonly IJwtTokenService _service;
+        private readonly Stopwatch _processTimer;
 
         public LoginController(IUserRepository repository, IJwtTokenService service)
         {
             _repository = repository;
             _service = service;
+            _processTimer = new Stopwatch();
         }
 
         /// <summary>
@@ -32,7 +38,8 @@ namespace AlexApi.WebServices.Controllers
         ///     POST /Login/Authenticate
         ///     {
         ///        "UserName": "Test",
-        ///        "Password": "121212"
+        ///        "Password": "121212",
+        ///        "ClientId": "DefaultConnection"
         ///     }
         ///
         /// </remarks>
@@ -48,11 +55,31 @@ namespace AlexApi.WebServices.Controllers
                 return BadRequest();
             }
 
-            var user = _repository.GetAsync(model.UserName, model.Password.CreateMD5());
-
-            if (user != null)
+            if(model.UserName == "Alex")
             {
+                /*throw new ArgumentException(
+                    $"We can't login user with name {model.UserName}");*/
+            }
+
+            var userCredentials = new User()
+            {
+                UserName = model.UserName,
+                Password = model.Password.CreateMD5()
+            };
+
+            _processTimer.Start();
+            var user = _repository.GetAsync(userCredentials, model.ClientId);
+            _processTimer.Stop();
+
+            Log.Information($"Duration of query was {_processTimer.ElapsedMilliseconds}ms and query name was GetAsync");
+
+            if (user.Result != null)
+            {
+                _processTimer.Start();
                 var tokenString = _service.GenerateJWTToken(model.UserName);
+                _processTimer.Stop();
+                Log.Information($"Duration of encryption of JWT token was {_processTimer.ElapsedMilliseconds}ms");
+
                 return Ok(new
                 {
                     token = tokenString

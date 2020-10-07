@@ -2,10 +2,11 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using AlexApi.AppServices.Abstract;
-using AlexApi.AppServices.Services;
+using AlexApi.AppServices;
+using AlexApi.Infrasctucture.Extensions;
+using AlexApi.Repositories;
+using AlexApi.Repositories.Interfaces;
 using AlexApi.Repositories.Repositories;
-using AlexAPI.WebServices.Infrastructure;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -33,8 +34,14 @@ namespace AlexApi.WebServices
         {
             services.AddControllers();
 
-            services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddScoped<IRequestContext, RequestContext>();
+            services.AddScoped<IConnectionProvider, ConnectionProvider>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
+
+            // scoped longer lives than transient
+            // user repository depends on connection provider
+            // dbcontext is not thread safe
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -75,8 +82,6 @@ namespace AlexApi.WebServices
                     }
                 });
 
-                c.OperationFilter<SwaggerAuthorizationOperationFilter>();
-
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
@@ -108,6 +113,10 @@ namespace AlexApi.WebServices
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.ConfigureCustomExceptionMiddleware();
+
+            app.UseStatusCodePages();
 
             app.UseSwagger();
 

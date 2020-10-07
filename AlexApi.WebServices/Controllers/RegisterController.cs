@@ -4,6 +4,9 @@ using AlexAPI.WebServices.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using AlexApi.Infrasctucture.Extensions;
+using AlexApi.Repositories.Interfaces;
+using System.Diagnostics;
+using Serilog;
 
 namespace AlexAPI.WebServices.Controllers
 {
@@ -12,9 +15,12 @@ namespace AlexAPI.WebServices.Controllers
     public class RegisterController : ControllerBase
     {
         private readonly IUserRepository _repository;
+        private readonly Stopwatch _processTimer;
+
         public RegisterController(IUserRepository repository)
         {
             _repository = repository;
+            _processTimer = new Stopwatch();
         }
 
         /// <summary>
@@ -26,7 +32,8 @@ namespace AlexAPI.WebServices.Controllers
         ///     POST /Register
         ///     {
         ///        "UserName": "Test",
-        ///        "Password": "121212"
+        ///        "Password": "121212",
+        ///        "ClientId": "DefaultConnection"
         ///     }
         ///
         /// </remarks>
@@ -47,7 +54,11 @@ namespace AlexAPI.WebServices.Controllers
                 Password = model.Password.CreateMD5()
             };
 
-            _repository.AddAsync(user);
+            _processTimer.Start();
+            _repository.AddAsync(user, model.ClientId);
+            _processTimer.Stop();
+            
+            Log.Information($"Duration of query was {_processTimer.ElapsedMilliseconds}ms and query name was AddAsync");
 
             return Ok();
         }

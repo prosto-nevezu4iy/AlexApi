@@ -14,5 +14,8 @@ namespace AlexAPI.WebServices.Models
 
         [Required]
         public string Password { get; set; }
+
+        [Required]
+        public string ClientId { get; set; }
     }
 }

@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AlexApi.Domain\AlexApi.Domain.csproj" />
+    <ProjectReference Include="..\AlexApi.Infrasctucture\AlexApi.Infrasctucture.csproj" />
   </ItemGroup>
 
 </Project>

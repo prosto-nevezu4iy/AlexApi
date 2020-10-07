@@ -14,7 +14,8 @@
                  POST /Login/Authenticate
                  {
                     "UserName": "Test",
-                    "Password": "121212"
+                    "Password": "121212",
+                    "ClientId": "DefaultConnection"
                  }
             
              </remarks>
@@ -39,7 +40,8 @@
                  POST /Register
                  {
                     "UserName": "Test",
-                    "Password": "121212"
+                    "Password": "121212",
+                    "ClientId": "DefaultConnection"
                  }
             
              </remarks>
